@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock title %}
+{% block content %}
+
+  {% load custom_tags %}
+  {% draw_menu menu_name as page_obj %}
+
+    <ul>
+      {% for item in page_obj %}
+        {% if item.parent %}
+          <li>
+          <a href="{{ item.parent.slug }}">Вернуться назад в пункт - {{ item.parent.title }}</a>
+          </li>
+          {% include "menu.html" %}
+        {% else %}
+          {% include "menu.html" %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+  {% endblock content %}
